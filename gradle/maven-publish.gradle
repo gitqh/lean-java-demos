@@ -1,0 +1,53 @@
+apply plugin: 'maven-publish'
+
+publishing {
+    repositories {
+        maven {
+            url "${System.env.NEXUS_BASE_URI}/repository/maven-snapshots/"
+
+            credentials {
+                username "$System.env.NEXUS_CI_USER"
+                password "$System.env.NEXUS_CI_PASS"
+            }
+        }
+    }
+
+    publications {
+        fatjar(MavenPublication) {
+            groupId "$project.group"
+            artifactId "spring-boot-boilerplate"
+            version "$gitVersionName"
+
+            artifact "$buildDir/libs/${project.name}-1.0.0.jar"
+        }
+
+        testArtifacts(MavenPublication) {
+            groupId "$project.group"
+            artifactId "boilerplate-test"
+            version "$gitVersionName"
+
+            artifact file("$buildDir/distributions/boilerplate-test-1.0.0.zip")
+        }
+    }
+}
+
+task archiveTestArtifacts(type: Zip, dependsOn: 'jar') {
+    baseName = 'boilerplate-test'
+
+    from 'gradlew'
+    from 'build.gradle'
+    from 'gradle.properties'
+    from 'settings.gradle'
+
+    from('gradle') {
+        into 'gradle'
+    }
+    from('build/classes') {
+        into 'build/classes'
+    }
+    from('build/resources') {
+        into 'build/resources'
+    }
+}
+
+publish.dependsOn(archiveTestArtifacts)

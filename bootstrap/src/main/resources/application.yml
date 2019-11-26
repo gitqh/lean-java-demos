@@ -1,0 +1,34 @@
+server:
+  port: 8080
+  error:
+    include-stacktrace: never
+
+spring:
+  profiles:
+    active: local
+  jackson:
+    dateFormat: yyyy-MM-dd'T'HH:mm:ssZZ
+    timeZone: UTC
+  datasource:
+    testOnBorrow: true
+    validationQuery: SELECT 1
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    show_sql: true
+    format_sql: true
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+  redis:
+    host: localhost
+    port: 6379
+
+management:
+  health:
+    db:
+      enabled: true
+
+logging:
+  file: /home/workspace/spring-boot-boilerplate.log
+  level:
+    com.exmertec: warn
