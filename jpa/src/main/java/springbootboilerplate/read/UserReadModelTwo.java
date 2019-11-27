@@ -1,4 +1,4 @@
-package springbootboilerplate.domain;
+package springbootboilerplate.read;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,23 +10,19 @@ import lombok.ToString;
 import lombok.experimental.Accessors;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import springbootboilerplate.domain.Department;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.NamedAttributeNode;
+import javax.persistence.NamedEntityGraph;
 import javax.persistence.Table;
 import java.sql.Timestamp;
-import java.util.Set;
 
 @EqualsAndHashCode(of = "username")
 @ToString(of = "username")
@@ -34,12 +30,11 @@ import java.util.Set;
 @Setter
 @Accessors(chain = true)
 @Builder
+@Table(name = "user")
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "user")
-public class User {
-
+public class UserReadModelTwo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -51,28 +46,8 @@ public class User {
 
     private String phone;
 
+    @Column(name = "department_id")
+    private String departId;
+
     private Boolean enabled;
-
-    private String password;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "avatar_id")
-    private UserAvatar userAvatar;
-
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "user_role",
-            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")}
-    )
-    private Set<Role> roles;
-
-    @ManyToOne
-    @JoinColumn(name = "department_id")
-    private Department department;
-
-    @CreationTimestamp
-    private Timestamp createAt;
-
-    @UpdateTimestamp
-    private Timestamp updateAt;
 }

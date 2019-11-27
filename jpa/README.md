@@ -5,7 +5,6 @@
 1. 权限添加
 2. 权限删除
 3. 权限更新
-4. 生成 Tree 
 
 5. 手动表关联 
 6. 练习投影
@@ -13,6 +12,7 @@
 
 8. 条件查询基础
 9. @CreatedB
+10. @OneToOne 的 Save
 
 ```java
 Specification<T> specification = new Specification<T>() {

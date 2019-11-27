@@ -1,4 +1,3 @@
-rootProject.name = 'spring-boot-boilerplate'
+rootProject.name = 'lean-java-by-tdd'
 include 'jpa'
 include 'java-basic'
-
