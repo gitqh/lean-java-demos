@@ -5,7 +5,7 @@ server:
 
 spring:
   profiles:
-    active: local
+    active: test
   jackson:
     dateFormat: yyyy-MM-dd'T'HH:mm:ssZZ
     timeZone: UTC
@@ -32,3 +32,10 @@ logging:
   file: /home/workspace/spring-boot-boilerplate.log
   level:
     com.exmertec: warn
+
+token:
+  header: Authorization
+  expiration: 21600000
+  prefix: Bearer
+  maxErrorTimes: 5
+  errorTimesExpiration:  21600000
