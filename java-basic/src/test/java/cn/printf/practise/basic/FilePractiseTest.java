@@ -6,6 +6,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStream;
 
@@ -86,7 +88,6 @@ public class FilePractiseTest {
          * flush 强制输出
          * 关闭资源
          */
-
         File file = new File("./test.txt");
         FileOutputStream fileOutputStream =  null;
 
@@ -105,6 +106,42 @@ public class FilePractiseTest {
             }catch (Exception e){
                 System.out.println("关闭输出流失败！");
             }
+        }
+    }
+
+
+    /**
+     * 使用字符流读取文本文件
+     * 建立联系
+     * 使用字符流
+     * 读入
+     * 关闭
+     */
+    @Test
+    public void readFileByCharInputStream() {
+        File file = new File("test.txt");
+        try (FileReader fileReader = new FileReader(file)) {
+            char[] flush = new char[10];
+            int len = 0;
+            while (-1 != (len= fileReader.read(flush))){
+                System.out.println(flush);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void writeFileToFile() {
+        File file = new File("test.txt");
+
+        try (FileWriter fileWriter = new FileWriter(file)) {
+            fileWriter.append("Hello world by file writer!");
+            fileWriter.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
