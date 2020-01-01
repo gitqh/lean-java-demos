@@ -2,6 +2,7 @@ package cn.printf.practise.basic;
 
 import org.junit.Test;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -10,6 +11,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 
 
 public class FilePractiseTest {
@@ -89,21 +91,21 @@ public class FilePractiseTest {
          * 关闭资源
          */
         File file = new File("./test.txt");
-        FileOutputStream fileOutputStream =  null;
+        FileOutputStream fileOutputStream = null;
 
         try {
-            fileOutputStream =  new FileOutputStream(file);
+            fileOutputStream = new FileOutputStream(file);
 
             fileOutputStream.write("hello world!".getBytes());
             fileOutputStream.flush();
         } catch (IOException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             try {
-                if(null != fileOutputStream){
+                if (null != fileOutputStream) {
                     fileOutputStream.close();
                 }
-            }catch (Exception e){
+            } catch (Exception e) {
                 System.out.println("关闭输出流失败！");
             }
         }
@@ -123,7 +125,7 @@ public class FilePractiseTest {
         try (FileReader fileReader = new FileReader(file)) {
             char[] flush = new char[10];
             int len = 0;
-            while (-1 != (len= fileReader.read(flush))){
+            while (-1 != (len = fileReader.read(flush))) {
                 System.out.println(flush);
             }
         } catch (FileNotFoundException e) {
@@ -142,6 +144,59 @@ public class FilePractiseTest {
             fileWriter.flush();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void readFilByBufferedSteam() {
+        File file = new File("test.txt");
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            String line = reader.readLine();
+            System.out.println(line);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void stringEncodeUTF8() {
+        try {
+            // 编码
+            byte[] bytes = "中国".getBytes("UTF-8");
+            // 解码
+            System.out.println(new String(bytes, "GBK"));
+
+            // UTF-8
+            System.out.println(new String(bytes, "UTF-8"));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void shouldPrintFileTree() {
+        String pathName = ".";
+
+        tree(pathName, 0);
+    }
+
+    private void tree(String pathName, int intent) {
+        File file = new File(pathName);
+        File[] files = file.listFiles();
+
+        for (File one : files) {
+            if (one.isDirectory()) {
+                tree(one.getPath(), intent++);
+            }
+
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < intent; i++) {
+                sb.append(".");
+            }
+            sb.append(one.getName());
+            System.out.println(sb.toString());
         }
     }
 }
