@@ -2,16 +2,17 @@ package cn.printf.practise.basic;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import java.util.Iterator;
 
 public class MyIteratorTest {
 
     @Test
     public void shouldOutputElementMyIterator() {
-        MyIterator myIterator = new MyIterator();
+        MyArray myArray = new MyArray();
+        Iterator<String> iterator = myArray.iterator();
 
-        while (myIterator.hasNext()){
-            System.out.println(myIterator.next());
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next());
         }
     }
 }
