@@ -1,7 +1,10 @@
 package cn.printf.practise.basic.singleton;
 
+/**
+ * 饿汉式单例
+ */
 public class HungryMode {
-    private static HungryMode instance = null;
+    private static HungryMode instance = new HungryMode();
 
     /**
      * 避免外部直接初始话
@@ -14,12 +17,6 @@ public class HungryMode {
      * 公共的对外方法
      */
     public static HungryMode getInstance() throws InterruptedException {
-        if (null == instance) {
-            // 放大多线程误差
-            Thread.sleep(1000);
-            instance = new HungryMode();
-        }
-
         return instance;
     }
 }

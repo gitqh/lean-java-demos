@@ -1,4 +1,4 @@
-package cn.printf.practise.basic;
+package cn.printf.practise.basic.io;
 
 import org.junit.Test;
 
