@@ -1,7 +1,7 @@
 package cn.printf.practise.basic.multithreading;
 
 /**
- * 死锁的演示
+ * 死锁的演示，当同步访问多个对象的时候，会出现死锁
  */
 public class DeadLackTest {
 
