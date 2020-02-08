@@ -18,7 +18,7 @@ public class Send implements Runnable {
     private DataOutputStream dos;
     // 结束线程的标记
     private boolean isRunning = true;
-    
+
     public Send() {
         console = new BufferedReader(new InputStreamReader(System.in));
     }
@@ -42,6 +42,7 @@ public class Send implements Runnable {
         if (null != message && !message.equals("")) {
             try {
                 dos.writeUTF(message);
+                dos.flush();
             } catch (IOException e) {
                 e.printStackTrace();
                 System.out.println("发生异常运行结束");
@@ -56,7 +57,7 @@ public class Send implements Runnable {
         try {
             s = console.readLine();
         } catch (IOException e) {
-            // e.printStackTrace();
+             e.printStackTrace();
         }
         return s;
     }

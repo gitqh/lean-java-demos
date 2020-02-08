@@ -39,6 +39,7 @@ public class Receive implements Runnable {
             e.printStackTrace();
             isRunning = false;
         }
+        System.out.println("服务器 >> " + receivedMessage);
         return receivedMessage;
     }
 

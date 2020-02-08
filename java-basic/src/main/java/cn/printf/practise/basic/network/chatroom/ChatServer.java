@@ -16,14 +16,18 @@ public class ChatServer {
 
         while (true) {
             Socket socket = serverSocket.accept();
-            DataInput dataInput = new DataInputStream(socket.getInputStream());
-            String data = dataInput.readUTF();
-            System.out.println(data);
+            System.out.println("客户端已经接入");
 
-            // 输出流
+            DataInput dataInput = new DataInputStream(socket.getInputStream());
             DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
-            dataOutputStream.writeUTF("服务端返回数据");
-            dataOutputStream.flush();
+            while (true) {
+                String data = dataInput.readUTF();
+                System.out.println(data);
+
+                // 持续读出输出流
+                dataOutputStream.writeUTF("服务器 ->> " + data);
+                dataOutputStream.flush();
+            }
         }
     }
 }
