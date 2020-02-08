@@ -3,7 +3,6 @@ package cn.printf.practise.basic.network.chatroom;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.net.Socket;
-import java.security.PublicKey;
 
 /**
  * 接收数据
@@ -39,7 +38,7 @@ public class Receive implements Runnable {
             e.printStackTrace();
             isRunning = false;
         }
-        System.out.println("服务器 >> " + receivedMessage);
+        System.out.println(receivedMessage);
         return receivedMessage;
     }
 
