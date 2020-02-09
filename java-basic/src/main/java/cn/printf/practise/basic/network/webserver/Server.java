@@ -1,4 +1,4 @@
-package cn.printf.practise.basic.webserver;
+package cn.printf.practise.basic.network.webserver;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -7,13 +7,12 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.security.cert.CRL;
-import java.util.Date;
+
+import static cn.printf.practise.basic.network.webserver.Constants.CRLF;
 
 public class Server {
     public static final int PORT = 8080;
-    public static final String BLANK = " ";
-    public static final String CRLF = "\r\n";
+
     public static ServerSocket serverSocket;
 
     public static void main(String[] args) {
@@ -55,30 +54,17 @@ public class Server {
             String requestInfo = sb.toString().trim();
             System.out.println(requestInfo);
 
-            // 响应返回
-            StringBuilder response = new StringBuilder();
             // 准备 body 数据
             String body = "<html><head><title>响应返回</title></head>\n" +
                     "<body>Hello my server!</body></html>\n";
 
-            // 1. 响应版本信息
-            response.append("HTTP/1.1").append(BLANK);
-            response.append("200").append(BLANK);
-            response.append("OK").append(CRLF);
-            // 2. 响应头
-            response.append("server: origin Server/0.0.1").append(CRLF);
-            response.append("date:").append(new Date()).append(CRLF);
-            response.append("content-type:text/html;charset=utf-8").append(CRLF);
-            response.append("content-length:").append(body.getBytes().length).append(CRLF);
             // 3. 响应消息体
-            response.append(CRLF);
-            response.append(body);
-
-            System.out.println(response.toString());
-
-            BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(client.getOutputStream()));
-            bufferedWriter.write(response.toString());
-            bufferedWriter.flush();
+            Response response = new Response(client.getOutputStream());
+            response
+                    .appendBody(body)
+                    .status(200)
+                    .output()
+                    .close();
         } catch (IOException e) {
             e.printStackTrace();
         }
