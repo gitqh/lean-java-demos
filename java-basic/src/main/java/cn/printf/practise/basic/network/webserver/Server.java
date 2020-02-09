@@ -1,19 +1,14 @@
 package cn.printf.practise.basic.network.webserver;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
-
-import static cn.printf.practise.basic.network.webserver.Constants.CRLF;
 
 public class Server {
     public static final int PORT = 8080;
 
-    public static ServerSocket serverSocket;
+    private static ServerSocket serverSocket;
+    private static boolean isRunning = true;
 
     public static void main(String[] args) {
         Server server = new Server();
@@ -38,33 +33,24 @@ public class Server {
      */
     public void receive() {
         try {
-            Socket client = serverSocket.accept();
+            while (isRunning) {
+                Socket client = serverSocket.accept();
 
-            String message = null;
-            StringBuilder sb = new StringBuilder();
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(client.getInputStream()));
-            while ((message = bufferedReader.readLine()).length() > 0) {
-                sb.append(message);
-                sb.append(CRLF);
-                if (null == message) {
-                    break;
-                }
+                Request request = new Request(client.getInputStream());
+                System.out.println(request.getRequestParams());
+
+                // 测试消息
+                String body = "<html><head><title>响应返回</title></head>\n" +
+                        "<body>Hello my server!</body></html>\n";
+
+                // 3. 响应消息体
+                Response response = new Response(client.getOutputStream());
+                response
+                        .appendBody(body)
+                        .status(200)
+                        .output()
+                        .close();
             }
-
-            String requestInfo = sb.toString().trim();
-            System.out.println(requestInfo);
-
-            // 准备 body 数据
-            String body = "<html><head><title>响应返回</title></head>\n" +
-                    "<body>Hello my server!</body></html>\n";
-
-            // 3. 响应消息体
-            Response response = new Response(client.getOutputStream());
-            response
-                    .appendBody(body)
-                    .status(200)
-                    .output()
-                    .close();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -74,6 +60,6 @@ public class Server {
      * 停止方法
      */
     public void stop() {
-
+        System.exit(-1);
     }
 }

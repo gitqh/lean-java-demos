@@ -31,8 +31,11 @@ public class Response {
     }
 
     public Response status(int code) {
+
+
         // 1. 响应版本信息
         headerInfo.append("HTTP/1.1").append(BLANK);
+        headerInfo.append(code).append(BLANK);
 
         switch (code) {
             case 200:
@@ -45,7 +48,6 @@ public class Response {
                 headerInfo.append("SERVER ERROR").append(CRLF);
                 break;
         }
-        headerInfo.append(code).append(BLANK);
 
         // 2. 响应头
         headerInfo.append("server: origin Server/0.0.1").append(CRLF);
