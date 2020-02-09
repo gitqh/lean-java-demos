@@ -47,9 +47,7 @@ public class Request implements Closeable {
     private void parseRequest() throws IOException {
         String line = null;
         StringBuilder sb = new StringBuilder();
-
         parseFirstLine();
-
         while ((line = bufferedReader.readLine()).length() > 0) {
             String[] split = line.split(":");
             // 解析头信息
@@ -68,12 +66,23 @@ public class Request implements Closeable {
      */
     private void parseFirstLine() throws IOException {
         String firstLine = bufferedReader.readLine();
-        String[] split = firstLine.split(BLANK);
-        method = split[0];
-        path = URLDecoder.decode(split[1], "utf-8");
-        protocol = split[2];
+        String[] metas = firstLine.split(BLANK);
+        String originPath = URLDecoder.decode(metas[1], "utf-8");
 
-        parseParameterMapValue(path);
+        method = metas[0];
+        protocol = metas[2];
+        path = basePath(originPath);
+
+        parseParameterMapValue(originPath);
+    }
+
+    private String basePath(String originPath) {
+        int index = originPath.indexOf("?");
+        if (index != -1) {
+            return originPath.substring(0, index);
+        } else {
+            return originPath;
+        }
     }
 
     private void parseParameterMapValue(String path) throws MalformedURLException {

@@ -21,9 +21,14 @@ public class Dispatcher implements Runnable {
         try {
             request = new Request(client.getInputStream());
             response = new Response(client.getOutputStream());
-            Servlet servlet = new Servlet();
+            Servlet servlet = WebApp.getServlet(request.getPath());
+            if (null == servlet) {
+                response.appendBody("not found").status(404).output();
+                return;
+            }
             servlet.service(request, response);
-        } catch (IOException e) {
+            response.output();
+        } catch (Exception e) {
             e.printStackTrace();
         } finally {
             CloseUtil.closeSocket(client);

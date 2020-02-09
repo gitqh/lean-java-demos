@@ -32,8 +32,6 @@ public class Response implements Closeable {
     }
 
     public Response status(int code) {
-
-
         // 1. 响应版本信息
         headerInfo.append("HTTP/1.1").append(BLANK);
         headerInfo.append(code).append(BLANK);
