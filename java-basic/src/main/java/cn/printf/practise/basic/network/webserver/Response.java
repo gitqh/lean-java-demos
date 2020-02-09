@@ -1,6 +1,7 @@
 package cn.printf.practise.basic.network.webserver;
 
 import java.io.BufferedWriter;
+import java.io.Closeable;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
@@ -10,7 +11,7 @@ import static cn.printf.practise.basic.network.webserver.CloseUtil.closeIO;
 import static cn.printf.practise.basic.network.webserver.Constants.BLANK;
 import static cn.printf.practise.basic.network.webserver.Constants.CRLF;
 
-public class Response {
+public class Response implements Closeable {
 
     private BufferedWriter bufferedWriter;
 
@@ -71,6 +72,7 @@ public class Response {
         return this;
     }
 
+    @Override
     public void close() {
         closeIO(bufferedWriter);
     }

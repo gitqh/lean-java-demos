@@ -35,24 +35,11 @@ public class Server {
         try {
             while (isRunning) {
                 Socket client = serverSocket.accept();
-
-                Request request = new Request(client.getInputStream());
-                System.out.println(request.getRequestParams());
-
-                // 测试消息
-                String body = "<html><head><title>响应返回</title></head>\n" +
-                        "<body>Hello my server!</body></html>\n";
-
-                // 3. 响应消息体
-                Response response = new Response(client.getOutputStream());
-                response
-                        .appendBody(body)
-                        .status(200)
-                        .output()
-                        .close();
+                new Thread(new Dispatcher(client)).start();
             }
         } catch (IOException e) {
             e.printStackTrace();
+            isRunning = false;
         }
     }
 

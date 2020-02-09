@@ -1,16 +1,18 @@
 package cn.printf.practise.basic.network.webserver;
 
 import java.io.BufferedReader;
+import java.io.Closeable;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
+import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.Map;
 
 import static cn.printf.practise.basic.network.webserver.Constants.BLANK;
 
-public class Request {
+public class Request implements Closeable {
     private String method;
     private String path;
     private String protocol;
@@ -68,7 +70,7 @@ public class Request {
         String firstLine = bufferedReader.readLine();
         String[] split = firstLine.split(BLANK);
         method = split[0];
-        path = split[1];
+        path = URLDecoder.decode(split[1], "utf-8");
         protocol = split[2];
 
         parseParameterMapValue(path);
@@ -80,7 +82,11 @@ public class Request {
             String[] paramStrings = queryString.split("&");
             for (String paramString : paramStrings) {
                 String[] paramPair = paramString.split("=");
-                requestParams.put(paramPair[0], paramPair[1]);
+                if (paramPair.length > 1) {
+                    requestParams.put(paramPair[0].trim(), paramPair[1].trim());
+                } else {
+                    requestParams.put(paramPair[0].trim(), null);
+                }
             }
         }
     }
@@ -115,5 +121,10 @@ public class Request {
 
     public BufferedReader getBufferedReader() {
         return bufferedReader;
+    }
+
+    @Override
+    public void close() throws IOException {
+        CloseUtil.closeIO(bufferedReader);
     }
 }
