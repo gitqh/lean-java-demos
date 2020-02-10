@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web>
+    <servlet>
+        <name>login</name>
+        <servlet-name>cn.printf.practise.basic.network.webserver.LoginServlet</servlet-name>
+    </servlet>
+    <servlet>
+        <name>login</name>
+        <servlet-name>cn.printf.practise.basic.network.webserver.LoginServlet</servlet-name>
+    </servlet>
+    <mapping>
+        <name>login</name>
+        <url-pattern>/login</url-pattern>
+    </mapping>
+</web>
