@@ -4,8 +4,8 @@ import java.io.Closeable;
 import java.io.IOException;
 import java.net.Socket;
 
-class CloseUtil {
-    static <T extends Closeable> void closeIO(T... io) {
+public class CloseUtil {
+    public static <T extends Closeable> void closeIO(T... io) {
         for (Closeable temp : io) {
             if (null != temp) {
                 try {
@@ -16,7 +16,7 @@ class CloseUtil {
         }
     }
 
-    static void closeSocket(Socket socket) {
+    public static void closeSocket(Socket socket) {
         if (null != socket) {
             try {
                 socket.close();

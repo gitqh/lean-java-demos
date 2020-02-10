@@ -1,7 +1,5 @@
 package cn.printf.practise.basic.network.webserver;
 
-
-import java.io.IOException;
 import java.net.Socket;
 
 /**

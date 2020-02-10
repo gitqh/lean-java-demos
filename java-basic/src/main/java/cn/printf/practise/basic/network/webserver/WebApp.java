@@ -1,14 +1,28 @@
 package cn.printf.practise.basic.network.webserver;
 
+import cn.printf.practise.basic.network.webserver.exception.InitWebException;
+import cn.printf.practise.basic.network.webserver.xml.WebAppDocument;
+import cn.printf.practise.basic.network.webserver.xml.WebXmlparser;
+
 import java.util.Map;
 
 public class WebApp {
     private static ServletContext context;
+    private static WebXmlparser webXmlparser;
 
     static {
         context = new ServletContext();
 
-        // 模拟数据
+        // 模拟数据，通过 xml 构建
+
+        // TODO parse xml 得到 context
+        try {
+            WebAppDocument webAppDocument = WebXmlparser.parseWebXml();
+            System.out.println(webAppDocument);
+        } catch (InitWebException e) {
+            e.printStackTrace();
+        }
+
         Map<String, String> mapping = context.getMapping();
         mapping.put("/login", "login");
         mapping.put("/log", "login");

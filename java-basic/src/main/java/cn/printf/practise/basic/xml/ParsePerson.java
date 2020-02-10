@@ -14,7 +14,6 @@ public class ParsePerson {
         SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
         // 2. 从解析工厂获取解析器
         SAXParser saxParser = saxParserFactory.newSAXParser();
-
         // 3. 加载处理器
         PersonHandler dh = new PersonHandler();
         saxParser.parse(

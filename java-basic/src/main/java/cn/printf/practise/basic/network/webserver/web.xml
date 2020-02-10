@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web>
+<web-app>
     <servlet>
         <name>login</name>
         <servlet-name>cn.printf.practise.basic.network.webserver.LoginServlet</servlet-name>
@@ -12,4 +12,4 @@
         <name>login</name>
         <url-pattern>/login</url-pattern>
     </mapping>
-</web>
+</web-app>
