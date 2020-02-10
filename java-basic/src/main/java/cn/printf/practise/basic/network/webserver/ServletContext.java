@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class ServletContext {
     // servlet 容器
-    private Map<String, Servlet> servlets;
+    private Map<String, String> servlets;
     // url request mapping
     private Map<String, String> mapping;
 
@@ -14,7 +14,7 @@ public class ServletContext {
         this.mapping = new HashMap<>();
     }
 
-    public Map<String, Servlet> getServlets() {
+    public Map<String, String> getServlets() {
         return servlets;
     }
 
