@@ -1,36 +1,22 @@
-package cn.printf.practise.basic.network.webserver;
+package cn.printf.practise.basic.network.webserver.dispatch;
 
 import cn.printf.practise.basic.network.webserver.exception.InitWebException;
 import cn.printf.practise.basic.network.webserver.xml.WebAppDocument;
 import cn.printf.practise.basic.network.webserver.xml.WebXmlparser;
 
-import java.util.Map;
-
 public class WebApp {
     private static ServletContext context;
-    private static WebXmlparser webXmlparser;
 
     static {
-        context = new ServletContext();
-
-        // 模拟数据，通过 xml 构建
-
-        // TODO parse xml 得到 context
         try {
             WebAppDocument webAppDocument = WebXmlparser.parseWebXml();
-            System.out.println(webAppDocument);
+            context = ServletContext.fromWebXmlDocument(webAppDocument);
         } catch (InitWebException e) {
             e.printStackTrace();
+
+            System.out.println("启动失败");
+            System.exit(-1);
         }
-
-        Map<String, String> mapping = context.getMapping();
-        mapping.put("/login", "login");
-        mapping.put("/log", "login");
-        mapping.put("/register", "register");
-
-        Map<String, String> servlets = context.getServlets();
-        servlets.put("login", "cn.printf.practise.basic.network.webserver.LoginServlet");
-        servlets.put("register", "cn.printf.practise.basic.network.webserver.RegisterServlet");
     }
 
     public static Servlet getServlet(String path) {

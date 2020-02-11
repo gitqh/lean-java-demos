@@ -1,4 +1,4 @@
-package cn.printf.practise.basic.network.webserver;
+package cn.printf.practise.basic.network.webserver.util;
 
 import java.io.Closeable;
 import java.io.IOException;

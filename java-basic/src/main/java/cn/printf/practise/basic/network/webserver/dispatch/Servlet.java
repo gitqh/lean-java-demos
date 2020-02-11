@@ -1,4 +1,4 @@
-package cn.printf.practise.basic.network.webserver;
+package cn.printf.practise.basic.network.webserver.dispatch;
 
 public abstract class Servlet {
     public void service(Request request, Response response) throws Exception {

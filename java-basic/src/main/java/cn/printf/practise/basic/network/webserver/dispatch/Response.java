@@ -1,4 +1,4 @@
-package cn.printf.practise.basic.network.webserver;
+package cn.printf.practise.basic.network.webserver.dispatch;
 
 import java.io.BufferedWriter;
 import java.io.Closeable;
@@ -7,9 +7,9 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.util.Date;
 
-import static cn.printf.practise.basic.network.webserver.CloseUtil.closeIO;
-import static cn.printf.practise.basic.network.webserver.Constants.BLANK;
-import static cn.printf.practise.basic.network.webserver.Constants.CRLF;
+import static cn.printf.practise.basic.network.webserver.util.CloseUtil.closeIO;
+import static cn.printf.practise.basic.network.webserver.constant.Constants.BLANK;
+import static cn.printf.practise.basic.network.webserver.constant.Constants.CRLF;
 
 public class Response implements Closeable {
 

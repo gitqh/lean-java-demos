@@ -1,4 +1,8 @@
-package cn.printf.practise.basic.network.webserver;
+package cn.printf.practise.basic.network.webserver.app;
+
+import cn.printf.practise.basic.network.webserver.dispatch.Request;
+import cn.printf.practise.basic.network.webserver.dispatch.Response;
+import cn.printf.practise.basic.network.webserver.dispatch.Servlet;
 
 import java.util.Map;
 
@@ -14,7 +18,7 @@ public class LoginServlet extends Servlet {
             body = "<html><head><title>响应返回</title></head>\n" +
                     "<body>登录失败!</body></html>\n";
         }
-        
+
         response
                 .appendBody(body)
                 .status(200);

@@ -1,5 +1,7 @@
 package cn.printf.practise.basic.network.webserver;
 
+import cn.printf.practise.basic.network.webserver.dispatch.Dispatcher;
+
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -32,14 +34,16 @@ public class Server {
      * 接收客户端
      */
     public void receive() {
-        try {
-            while (isRunning) {
-                Socket client = serverSocket.accept();
+        while (isRunning) {
+            Socket client = null;
+            try {
+                client = serverSocket.accept();
+                System.out.println("开始接受请求:" + client.getInetAddress());
                 new Thread(new Dispatcher(client)).start();
+            } catch (IOException e) {
+                e.printStackTrace();
+                isRunning = false;
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-            isRunning = false;
         }
     }
 

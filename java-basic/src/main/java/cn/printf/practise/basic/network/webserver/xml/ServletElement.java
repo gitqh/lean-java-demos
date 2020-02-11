@@ -2,7 +2,7 @@ package cn.printf.practise.basic.network.webserver.xml;
 
 public class ServletElement {
     private String name;
-    private String servletName;
+    private String servletClass;
 
     public String getName() {
         return name;
@@ -12,11 +12,11 @@ public class ServletElement {
         this.name = name;
     }
 
-    public String getServletName() {
-        return servletName;
+    public String getServletClass() {
+        return servletClass;
     }
 
-    public void setServletName(String servletName) {
-        this.servletName = servletName;
+    public void setServletClass(String servletClass) {
+        this.servletClass = servletClass;
     }
 }

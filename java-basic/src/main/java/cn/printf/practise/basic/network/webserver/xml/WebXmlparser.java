@@ -1,8 +1,7 @@
 package cn.printf.practise.basic.network.webserver.xml;
 
-import cn.printf.practise.basic.network.webserver.CloseUtil;
+import cn.printf.practise.basic.network.webserver.util.CloseUtil;
 import cn.printf.practise.basic.network.webserver.exception.InitWebException;
-import cn.printf.practise.basic.xml.PersonHandler;
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
@@ -10,7 +9,7 @@ import java.io.InputStream;
 
 public class WebXmlparser {
 
-    private static final String xmlConfigLocation = "cn/printf/practise/basic/network/webserver/web.xml";
+    private static final String xmlConfigLocation = "cn/printf/practise/basic/network/webserver/WEB_INFO/web.xml";
 
     public static WebAppDocument parseWebXml() throws InitWebException {
         InputStream webXmlInputStream = null;

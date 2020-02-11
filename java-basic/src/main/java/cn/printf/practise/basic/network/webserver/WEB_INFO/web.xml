@@ -2,11 +2,11 @@
 <web-app>
     <servlet>
         <name>login</name>
-        <servlet-name>cn.printf.practise.basic.network.webserver.LoginServlet</servlet-name>
+        <servlet-class>cn.printf.practise.basic.network.webserver.app.LoginServlet</servlet-class>
     </servlet>
     <servlet>
-        <name>login</name>
-        <servlet-name>cn.printf.practise.basic.network.webserver.LoginServlet</servlet-name>
+        <name>register</name>
+        <servlet-class>cn.printf.practise.basic.network.webserver.app.RegisterServlet</servlet-class>
     </servlet>
     <mapping>
         <name>login</name>

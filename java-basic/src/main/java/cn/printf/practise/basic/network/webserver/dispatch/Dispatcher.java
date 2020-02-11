@@ -1,5 +1,8 @@
-package cn.printf.practise.basic.network.webserver;
+package cn.printf.practise.basic.network.webserver.dispatch;
 
+import cn.printf.practise.basic.network.webserver.util.CloseUtil;
+
+import java.io.DataInputStream;
 import java.net.Socket;
 
 /**

@@ -12,8 +12,8 @@ public class ServletElementHandler implements ElementHandler<ServletElement> {
             case "name":
                 servletElement.setName(value);
                 break;
-            case "servlet-name":
-                servletElement.setServletName(value);
+            case "servlet-class":
+                servletElement.setServletClass(value);
                 break;
         }
     }

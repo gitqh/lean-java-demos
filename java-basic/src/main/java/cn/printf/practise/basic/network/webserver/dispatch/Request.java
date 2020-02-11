@@ -1,4 +1,6 @@
-package cn.printf.practise.basic.network.webserver;
+package cn.printf.practise.basic.network.webserver.dispatch;
+
+import cn.printf.practise.basic.network.webserver.util.CloseUtil;
 
 import java.io.BufferedReader;
 import java.io.Closeable;
@@ -10,7 +12,7 @@ import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.Map;
 
-import static cn.printf.practise.basic.network.webserver.Constants.BLANK;
+import static cn.printf.practise.basic.network.webserver.constant.Constants.BLANK;
 
 public class Request implements Closeable {
     private String method;
@@ -19,7 +21,6 @@ public class Request implements Closeable {
     private Map<String, String> requestParams;
     private String content;
     private Map<String, String> headers;
-    private String requestInfo;
     private BufferedReader bufferedReader;
 
     public Request() {
@@ -122,10 +123,6 @@ public class Request implements Closeable {
 
     public Map<String, String> getHeaders() {
         return headers;
-    }
-
-    public String getRequestInfo() {
-        return requestInfo;
     }
 
     public BufferedReader getBufferedReader() {

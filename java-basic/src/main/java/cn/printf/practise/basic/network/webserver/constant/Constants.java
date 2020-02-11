@@ -1,4 +1,4 @@
-package cn.printf.practise.basic.network.webserver;
+package cn.printf.practise.basic.network.webserver.constant;
 
 public class Constants {
     public static final String BLANK = " ";

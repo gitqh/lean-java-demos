@@ -1,4 +1,8 @@
-package cn.printf.practise.basic.network.webserver;
+package cn.printf.practise.basic.network.webserver.app;
+
+import cn.printf.practise.basic.network.webserver.dispatch.Request;
+import cn.printf.practise.basic.network.webserver.dispatch.Response;
+import cn.printf.practise.basic.network.webserver.dispatch.Servlet;
 
 public class RegisterServlet extends Servlet {
     @Override
